@@ -10,14 +10,16 @@ augroup KDE
 augroup END
 function! s:update_session_name()
     if !empty(@%)
-		" Cf. http://stackoverflow.com/questions/5608112/escape-filenames-using-the-same-way-bash-do-it
-        !qdbus org.kde.konsole $KONSOLE_DBUS_SESSION org.kde.konsole.Session.setTitle 1 $(printf '%q' %)
+        " Cf. http://stackoverflow.com/questions/5608112/escape-filenames-using-the-same-way-bash-do-it
+        silent !qdbus org.kde.konsole $KONSOLE_DBUS_SESSION org.kde.konsole.Session.setTitle 1 $(printf '%q' %)
     else
-        !qdbus org.kde.konsole $KONSOLE_DBUS_SESSION org.kde.konsole.Session.setTitle 1 'empty'
+        silent !qdbus org.kde.konsole $KONSOLE_DBUS_SESSION org.kde.konsole.Session.setTitle 1 'empty'
     endif
+    redraw!
 endfunction
 function! s:clear_session_name()
-    !qdbus org.kde.konsole $KONSOLE_DBUS_SESSION org.kde.konsole.Session.setTitle 1 $PWD
+    silent !qdbus org.kde.konsole $KONSOLE_DBUS_SESSION org.kde.konsole.Session.setTitle 1 $PWD
+    redraw!
 endfunction
 
 
